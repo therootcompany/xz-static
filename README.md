@@ -54,8 +54,8 @@ move bin_x86-64\xzdec.exe ..\unxz.exe
 You then need to move `xz.exe` and `unxz.exe` from the Downloads folder to a folder in your PATH, such as `C:\`
 
 ```powershell
-move %UserProfile%\Downloads\xz.exe  %SystemRoot%\system32\
-move %UserProfile%\Downloads\unxz.exe  %SystemRoot%\system32\
+move %UserProfile%\Downloads\xz.exe  %SystemRoot%\
+move %UserProfile%\Downloads\unxz.exe  %SystemRoot%\
 ```
 
 # Static Bulid Process
