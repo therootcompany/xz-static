@@ -120,7 +120,7 @@ git pull --rebase https://git.tukaani.org/xz.git master
 
 # License
 
-The distributabed code is licensed LGPLv2.1+ (**commercially safe** and NOT copyleft restricted at the project level).
+The distributable code is licensed LGPLv2.1+ (**commercially safe** and NOT copyleft restricted at the project level).
 
 The Mac and Linux builds here **DO NOT** contain any GPL code.
 
