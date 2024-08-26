@@ -111,7 +111,7 @@ which can be found at:
 git clone https://git.tukaani.org/xz.git
 ```
 
-This repo is rebased regularly, like so:
+This repo can be cleanly rebased to make up-to-date with the original, like so:
 
 ```bash
 git fetch https://git.tukaani.org/xz.git
