@@ -26,18 +26,22 @@ If you install manually you need to update your `PATH` or install into a system 
 
 Mac:
 
-```bash
-curl -L -o xz-5.2.5.tar.gz https://github.com/therootcompany/xz-static/releases/download/v5.2.5/xz-5.2.5-darwin-x86_64.tar.gz
-tar xvf xz-5.2.5.tar.gz
+```sh
+b_ver="5.2.5"
+curl -L -o ./xz-"${b_ver}".tar.gz https://github.com/therootcompany/xz-static/releases/download/v"${b_ver}"/xz-"${b_ver}"-darwin-x86_64.tar.gz
+tar xvf ./xz-"${b_ver}".tar.gz
+
 sudo mv xz-*/*xz /usr/local/bin/
 ```
 
 Linux:
 
-```bash
-curl -L -o xz-5.2.5.tar.gz https://github.com/therootcompany/xz-static/releases/download/v5.2.5/xz-5.2.5-linux-x86_64.tar.gz
-tar xvf xz-5.2.5.tar.gz
-sudo mv xz-*/*xz /usr/local/bin/
+```sh
+b_ver="5.2.5"
+curl -L -o ./xz-"${b_ver}".tar.gz https://github.com/therootcompany/xz-static/releases/download/v"${b_ver}"/xz-"${b_ver}"-linux-x86_64.tar.gz
+tar xvf ./xz-"${b_ver}".tar.gz
+
+sudo mv ./xz-*/*xz /usr/local/bin/
 ```
 
 Windows 10:
@@ -64,36 +68,40 @@ Here's how each of the static builds here were made:
 
 ## Mac
 
-```bash
-wget https://tukaani.org/xz/xz-5.2.5.tar.gz
-tar xvf xz-5.2.5.tar.gz
-pushd ./xz-5.2.5/
+```sh
+b_ver="5.2.5"
+wget https://tukaani.org/xz/xz-"${b_ver}".tar.gz
+tar xvf xz-"${b_ver}".tar.gz
+(
+    cd ./xz-"${b_ver}"/ || exit 1
     ./configure --disable-debug --disable-dependency-tracking --disable-silent-rules --disable-shared --disable-nls
     make
 
-    mkdir ./xz-5.2.5-darwin-x86_64
-    rsync -av ./src/xz/xz ./xz-5.2.5-darwin-x86_64/
-    rsync -av ./src/xzdec/xzdec ./xz-5.2.5-darwin-x86_64/
-    #ln -s xz ./xz-5.2.5-darwin-x86_64/unxz
-    tar cvf ./xz-5.2.5-darwin-x86_64.tar.gz ./xz-5.2.5-darwin-x86_64
-popd
+    mkdir ./xz-"${b_ver}"-darwin-x86_64
+    rsync -av ./src/xz/xz ./xz-"${b_ver}"-darwin-x86_64/
+    rsync -av ./src/xzdec/xzdec ./xz-"${b_ver}"-darwin-x86_64/
+    #ln -s xz ./xz-"${b_ver}"-darwin-x86_64/unxz
+    tar cvf ./xz-"${b_ver}"-darwin-x86_64.tar.gz ./xz-"${b_ver}"-darwin-x86_64
+)
 ```
 
 ## Linux
 
-```bash
-wget https://tukaani.org/xz/xz-5.2.5.tar.gz
-tar xvf xz-5.2.5.tar.gz
-pushd ./xz-5.2.5/
+```sh
+b_ver="5.2.5"
+wget https://tukaani.org/xz/xz-"${b_ver}".tar.gz
+tar xvf xz-"${b_ver}".tar.gz
+(
+    cd ./xz-"${b_ver}"/ || exit 1
     ./configure --disable-debug --disable-dependency-tracking --disable-silent-rules --disable-shared --disable-nls
     make
 
-    mkdir ./xz-5.2.5-linux-x86_64
-    rsync -av ./src/xz/xz ./xz-5.2.5-linux-x86_64/
-    rsync -av ./src/xzdec/xzdec ./xz-5.2.5-linux-x86_64/
-    #ln -s xz ./xz-5.2.5-linux-x86_64/unxz
-    tar cvf ./xz-5.2.5-linux-x86_64.tar.gz ./xz-5.2.5-linux-x86_64
-popd
+    mkdir ./xz-"${b_ver}"-linux-x86_64
+    rsync -av ./src/xz/xz ./xz-"${b_ver}"-linux-x86_64/
+    rsync -av ./src/xzdec/xzdec ./xz-"${b_ver}"-linux-x86_64/
+    #ln -s xz ./xz-"${b_ver}"-linux-x86_64/unxz
+    tar cvf ./xz-"${b_ver}"-linux-x86_64.tar.gz ./xz-"${b_ver}"-linux-x86_64
+)
 ```
 
 ## Windows 10
@@ -107,13 +115,13 @@ Aside from this README.md,
 this repository is an identical mirror of the official repository,
 which can be found at:
 
-```bash
+```sh
 git clone https://git.tukaani.org/xz.git
 ```
 
 This repo can be cleanly rebased to make up-to-date with the original, like so:
 
-```bash
+```sh
 git fetch https://git.tukaani.org/xz.git
 git pull --rebase https://git.tukaani.org/xz.git master
 ```
