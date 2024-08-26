@@ -27,7 +27,7 @@ If you install manually you need to update your `PATH` or install into a system 
 Mac:
 
 ```sh
-b_ver="5.2.5"
+b_ver="5.6.2"
 curl -L -o ./xz-"${b_ver}".tar.gz https://github.com/therootcompany/xz-static/releases/download/v"${b_ver}"/xz-"${b_ver}"-darwin-x86_64.tar.gz
 tar xvf ./xz-"${b_ver}".tar.gz
 
@@ -37,7 +37,7 @@ sudo mv xz-*/*xz /usr/local/bin/
 Linux:
 
 ```sh
-b_ver="5.2.5"
+b_ver="5.6.2"
 curl -L -o ./xz-"${b_ver}".tar.gz https://github.com/therootcompany/xz-static/releases/download/v"${b_ver}"/xz-"${b_ver}"-linux-x86_64.tar.gz
 tar xvf ./xz-"${b_ver}".tar.gz
 
@@ -69,8 +69,8 @@ Here's how each of the static builds here were made:
 ## Mac
 
 ```sh
-b_ver="5.2.5"
-wget https://tukaani.org/xz/xz-"${b_ver}".tar.gz
+b_ver="5.6.2"
+wget "https://github.com/tukaani-project/xz/releases/download/v${b_ver}/xz-${b_ver}.tar.gz"
 tar xvf xz-"${b_ver}".tar.gz
 (
     cd ./xz-"${b_ver}"/ || exit 1
@@ -88,8 +88,8 @@ tar xvf xz-"${b_ver}".tar.gz
 ## Linux
 
 ```sh
-b_ver="5.2.5"
-wget https://tukaani.org/xz/xz-"${b_ver}".tar.gz
+b_ver="5.6.2"
+wget "https://github.com/tukaani-project/xz/releases/download/v${b_ver}/xz-${b_ver}.tar.gz"
 tar xvf xz-"${b_ver}".tar.gz
 (
     cd ./xz-"${b_ver}"/ || exit 1
