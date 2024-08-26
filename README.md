@@ -10,14 +10,14 @@ and does not modify system settings or require sudo / Admin privileges. See [web
 
 Mac, Linux:
 
-```bash
-curl -sS https://webinstall.dev/xz | bash
+```sh
+curl -sS https://webi.sh/xz | sh
 ```
 
 Windows 10:
 
-```bash
-curl.exe -A MS https://webinstall.dev/xz | powershell
+```sh
+curl.exe -A MS https://webi.ms/xz | powershell
 ```
 
 # Manual Install
