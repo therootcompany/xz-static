@@ -54,8 +54,8 @@ curl.exe -o xz-5.8.4-windows-amd64.zip https://github.com/therootcompany/xz-stat
 mkdir xz-5.8.4
 pushd xz-5.8.4
 tar.exe xvf ../xz-5.8.4-windows-amd64.zip
-move bin_x86-64\xz.exe ..\
-move bin_x86-64\xzdec.exe ..\unxz.exe
+move bin\xz.exe ..\
+move bin\xzdec.exe ..\unxz.exe
 ```
 
 The matching `xz-5.8.4-windows-i686.zip` archive contains `bin_i686-sse2/`.
