@@ -47,10 +47,10 @@ sudo mv ./xz-*/*xz /usr/local/bin/
 Windows 10:
 
 ```powershell
-curl.exe -o xz-5.8.4-windows.zip https://github.com/tukaani-project/xz/releases/download/v5.8.4/xz-5.8.4-windows.zip
+curl.exe -o xz-5.8.4-windows-amd64.zip https://github.com/tukaani-project/xz/releases/download/v5.8.4/xz-5.8.4-windows-amd64.zip
 mkdir xz-5.8.4
 pushd xz-5.8.4
-tar.exe xvf ../xz-5.8.4-windows.zip
+tar.exe xvf ../xz-5.8.4-windows-amd64.zip
 move bin_x86-64\xz.exe ..\
 move bin_x86-64\xzdec.exe ..\unxz.exe
 ```
