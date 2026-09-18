@@ -46,14 +46,20 @@ sudo mv ./xz-*/*xz /usr/local/bin/
 
 Windows 10:
 
+The release republishes the upstream Windows build as two architecture-specific
+archives with unambiguous names:
+
 ```powershell
-curl.exe -o xz-5.8.4-windows-amd64.zip https://github.com/tukaani-project/xz/releases/download/v5.8.4/xz-5.8.4-windows-amd64.zip
+curl.exe -o xz-5.8.4-windows-amd64.zip https://github.com/therootcompany/xz-static/releases/download/v5.8.4/xz-5.8.4-windows-amd64.zip
 mkdir xz-5.8.4
 pushd xz-5.8.4
 tar.exe xvf ../xz-5.8.4-windows-amd64.zip
 move bin_x86-64\xz.exe ..\
 move bin_x86-64\xzdec.exe ..\unxz.exe
 ```
+
+The matching `xz-5.8.4-windows-i686.zip` archive contains `bin_i686-sse2/`.
+Both archives include the matching `liblzma.dll` and `include/lzma.h` headers.
 
 You then need to move `xz.exe` and `unxz.exe` from the Downloads folder to a folder in your PATH, such as `C:\`
 
@@ -64,9 +70,10 @@ move %UserProfile%\Downloads\unxz.exe  %SystemRoot%\
 
 # Release Build Process
 
-Release `v5.8.4` contains binaries for macOS Intel/arm64 and Alpine Linux
-amd64/arm64. POSIX archives also contain the PIC static `liblzma.a`, headers,
-and `liblzma.pc` for consumers such as Python.
+Release `v5.8.4` contains binaries for macOS Intel/arm64, Alpine Linux
+amd64/arm64, and Windows amd64/i686. POSIX archives also contain the PIC static
+`liblzma.a`, headers, and `liblzma.pc` for consumers such as Python. Windows
+archives include the matching `liblzma.dll` and public headers.
 
 Build the Linux targets in Alpine containers:
 
