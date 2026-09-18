@@ -27,7 +27,7 @@ If you install manually you need to update your `PATH` or install into a system 
 Mac:
 
 ```sh
-b_ver="5.2.5"
+b_ver="5.8.4"
 curl -L -o ./xz-"${b_ver}".tar.gz https://github.com/therootcompany/xz-static/releases/download/v"${b_ver}"/xz-"${b_ver}"-darwin-x86_64.tar.gz
 tar xvf ./xz-"${b_ver}".tar.gz
 
@@ -37,7 +37,7 @@ sudo mv xz-*/*xz /usr/local/bin/
 Linux:
 
 ```sh
-b_ver="5.2.5"
+b_ver="5.8.4"
 curl -L -o ./xz-"${b_ver}".tar.gz https://github.com/therootcompany/xz-static/releases/download/v"${b_ver}"/xz-"${b_ver}"-linux-x86_64.tar.gz
 tar xvf ./xz-"${b_ver}".tar.gz
 
@@ -47,10 +47,10 @@ sudo mv ./xz-*/*xz /usr/local/bin/
 Windows 10:
 
 ```powershell
-curl.exe -o xz-5.2.5-windows.zip https://tukaani.org/xz/xz-5.2.5-windows.zip
-mkdir xz-5.2.5
-pushd xz-5.2.5
-tar.exe xvf ../xz-5.2.5-windows.zip
+curl.exe -o xz-5.8.4-windows.zip https://github.com/tukaani-project/xz/releases/download/v5.8.4/xz-5.8.4-windows.zip
+mkdir xz-5.8.4
+pushd xz-5.8.4
+tar.exe xvf ../xz-5.8.4-windows.zip
 move bin_x86-64\xz.exe ..\
 move bin_x86-64\xzdec.exe ..\unxz.exe
 ```
@@ -62,52 +62,35 @@ move %UserProfile%\Downloads\xz.exe  %SystemRoot%\
 move %UserProfile%\Downloads\unxz.exe  %SystemRoot%\
 ```
 
-# Static Bulid Process
+# Release Build Process
 
-Here's how each of the static builds here were made:
+Release `v5.8.4` contains binaries for macOS Intel/arm64 and Alpine Linux
+amd64/arm64. POSIX archives also contain the PIC static `liblzma.a`, headers,
+and `liblzma.pc` for consumers such as Python.
 
-## Mac
-
-```sh
-b_ver="5.2.5"
-wget https://tukaani.org/xz/xz-"${b_ver}".tar.gz
-tar xvf xz-"${b_ver}".tar.gz
-(
-    cd ./xz-"${b_ver}"/ || exit 1
-    ./configure --disable-debug --disable-dependency-tracking --disable-silent-rules --disable-shared --disable-nls
-    make
-
-    mkdir ./xz-"${b_ver}"-darwin-x86_64
-    rsync -av ./src/xz/xz ./xz-"${b_ver}"-darwin-x86_64/
-    rsync -av ./src/xzdec/xzdec ./xz-"${b_ver}"-darwin-x86_64/
-    #ln -s xz ./xz-"${b_ver}"-darwin-x86_64/unxz
-    tar cvf ./xz-"${b_ver}"-darwin-x86_64.tar.gz ./xz-"${b_ver}"-darwin-x86_64
-)
-```
-
-## Linux
+Build the Linux targets in Alpine containers:
 
 ```sh
-b_ver="5.2.5"
-wget https://tukaani.org/xz/xz-"${b_ver}".tar.gz
-tar xvf xz-"${b_ver}".tar.gz
-(
-    cd ./xz-"${b_ver}"/ || exit 1
-    ./configure --disable-debug --disable-dependency-tracking --disable-silent-rules --disable-shared --disable-nls
-    make
+# arm64 on Apple Silicon
+container run --arch arm64 alpine:3.22 ...
 
-    mkdir ./xz-"${b_ver}"-linux-x86_64
-    rsync -av ./src/xz/xz ./xz-"${b_ver}"-linux-x86_64/
-    rsync -av ./src/xzdec/xzdec ./xz-"${b_ver}"-linux-x86_64/
-    #ln -s xz ./xz-"${b_ver}"-linux-x86_64/unxz
-    tar cvf ./xz-"${b_ver}"-linux-x86_64.tar.gz ./xz-"${b_ver}"-linux-x86_64
-)
+# amd64 on Apple Silicon (requires Rosetta)
+container run --arch amd64 --rosetta alpine:3.22 ...
 ```
 
-## Windows 10
+Use these configure/build options for a POSIX target:
 
-The Windows 10 build is taken from <https://tukaani.org/xz/>,
-specifically <https://tukaani.org/xz/xz-5.2.5-windows.zip>.
+```sh
+CFLAGS=-fPIC ./configure --disable-shared --enable-static --disable-nls --disable-doc
+make LDFLAGS=-all-static
+make DESTDIR=/stage install
+```
+
+Build macOS Intel with Xcode using `-arch x86_64 -mmacosx-version-min=10.15`.
+Build macOS arm64 with `-arch arm64 -mmacosx-version-min=11.0`.
+
+The source archive is generated from the same `xz-static` commit as the binary
+artifacts. `checksums.txt` covers every release asset.
 
 # Original Source
 
