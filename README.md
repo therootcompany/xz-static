@@ -96,6 +96,15 @@ make DESTDIR=/stage install
 Build macOS Intel with Xcode using `-arch x86_64 -mmacosx-version-min=10.15`.
 Build macOS arm64 with `-arch arm64 -mmacosx-version-min=11.0`.
 
+Repackage the upstream Windows archive into clean, architecture-specific ZIPs:
+
+```sh
+scripts/repackage-windows.sh 5.8.4 xz-5.8.4-windows.zip release/
+```
+
+The script produces `xz-5.8.4-windows-amd64.zip` and
+`xz-5.8.4-windows-i686.zip`, each containing only `bin/` and `include/`.
+
 The source archive is generated from the same `xz-static` commit as the binary
 artifacts. `checksums.txt` covers every release asset.
 
